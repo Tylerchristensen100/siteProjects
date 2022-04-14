@@ -1,0 +1,139 @@
+::-moz-selection {
+  background: #1b5edb;
+  color: #fff;
+  text-shadow: none;
+}
+::selection {
+  background: #063386;
+  color: #fff;
+  text-shadow: none;
+}
+
+a {
+  color: #063386;
+  text-decoration: none;
+}
+
+a:hover {
+	color: #114199;
+	text-decoration: underline;
+}
+
+.tweet a {
+	color:#063386;
+}
+
+.tweet .tweet_time a:hover i {
+	color: #063386;
+}
+
+.folio-caption .folio-link a:hover .icon-rounded {
+	background: #063386;
+}
+
+
+/* fontawesome icons */
+.icon-square:hover,
+.icon-rounded:hover,
+.icon-circled:hover {
+    background-color: #063386;
+}
+[class^="icon-"].active,
+[class*=" icon-"].active {
+    background-color: #063386;
+}
+
+
+
+
+.navbar .nav > li > a:hover {
+  color: #063386;
+}
+
+
+ul.nav li.current {
+  background: #063386;
+}
+.dropdown-menu li > a:hover,
+.dropdown-menu li > a:focus,
+.dropdown-submenu:hover > a {
+	background: #063386;
+}
+
+input:focus, textarea:focus {
+	border: 1px solid #063386;
+}
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: #063386;
+}
+.letter-container h2 span:hover{
+	color: #063386;
+}
+
+
+/* tab */
+
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover {
+	border-top:4px solid #063386;
+}
+.nav-tabs > .active > a {
+	color: #063386;
+}
+
+/* accordion */
+.accordion-heading a:hover {
+	color: #063386;
+}
+.accordion-heading .active{
+	color: #063386;
+}
+
+/*.accordion-inner {
+
+}*/
+
+/* sequence slider */
+#sequence-theme .next,
+#sequence-theme .prev {
+	background:#063386;
+}
+
+.special-box, .box-color{
+	background: #063386;
+}
+
+.special-box:after{
+	border-color:#000 #063386;
+}
+
+
+/* portfolio */
+
+.thumb-wrapp{
+	background:#063386;
+}
+.folio-caption{
+	background:#063386;
+}
+
+iframe.contact-map{
+  -webkit-box-shadow: 6px 6px 0px #063386;
+     -moz-box-shadow: 6px 6px 0px #063386;
+          box-shadow: 6px 6px 0px #0fbb1d;
+}
