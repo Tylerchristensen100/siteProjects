@@ -1,8 +1,36 @@
-import React from 'react';
+import React, {useState, useEffect, useReducer, useRef} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+
+
+function App() {
+  const sound = useRef();
+  const color= useRef();
+
+  const submit = (e) => {
+    e.preventDefault();
+    const soundValue = sound.current.value;
+    const colorValue = color.current.value;
+    sound.current.value = "";
+    color.current.value = "";
+    }
+    return (
+      <>
+       <form onSubmit={submit}>
+  <input type="text" placeholder="Sound..." ref={sound} />
+         <input type="color" ref={color} />
+         <button>ADD</button>
+       </form>
+      </>
+    )
+}
+
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
