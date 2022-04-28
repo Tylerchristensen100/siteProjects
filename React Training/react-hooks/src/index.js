@@ -20,7 +20,7 @@ function App() {
     return (
       <>
        <form onSubmit={submit}>
-  <input type="text" placeholder="Sound..." ref={sound} />
+         <input type="text" placeholder="Sound..." ref={sound} />
          <input type="color" ref={color} />
          <button>ADD</button>
        </form>
