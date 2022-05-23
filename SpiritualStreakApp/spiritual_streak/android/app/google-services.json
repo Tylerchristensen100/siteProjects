@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "561416647525",
+    "project_id": "spiritual-streak",
+    "storage_bucket": "spiritual-streak.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561416647525:android:700806a2ee13963f89a78c",
+        "android_client_info": {
+          "package_name": "tylerchristensen.com.spiritual_streak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561416647525-qv97jd9upd7bpre0acc82ofmt9rf3ejq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTuWrXZ_M4_h9b4hpAOCRqF1zo6LY5-hM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561416647525-qv97jd9upd7bpre0acc82ofmt9rf3ejq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "561416647525-sl9j7uu7d2m1plhj2nghh6tq8813ao5u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "tylerchristensen.com.spiritualStreak"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
