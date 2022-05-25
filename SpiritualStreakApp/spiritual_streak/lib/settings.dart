@@ -4,6 +4,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import 'main.dart';
 import 'logIn.dart';
+import 'forgotPassword.dart';
 
 class settings extends StatefulWidget {
   const settings({Key? key}) : super(key: key);
@@ -35,21 +36,16 @@ class _settingsState extends State<settings> {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10),
                     child: const Text(
-                      'Spiritual Streak',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 30),
-                    )),
-                Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10),
-                    child: const Text(
-                      'Sign in',
+                      'Settings',
                       style: TextStyle(fontSize: 20),
                     )),
                 TextButton(
                   onPressed: () {
                     //forgot password screen
-                    //send to forgot password screen so they can reset it
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPassword()));
                   },
                   child: const Text(
                     'Forgot Password',
