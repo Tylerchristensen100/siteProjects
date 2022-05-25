@@ -21,6 +21,10 @@ class _createAccountState extends State<createAccount> {
 
   bool showSpinner = false;
 
+  TextEditingController emailController;
+  TextEditingController passwordController;
+  TextEditingController password2Controller
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +87,7 @@ class _createAccountState extends State<createAccount> {
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: TextField(
                     obscureText: true,
-                    // controller: passwordController,
+                    controller: password2Controller,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Verify password',
@@ -124,7 +128,13 @@ class _createAccountState extends State<createAccount> {
                                 builder: (context) => const login());
                           }
                         } else {
-                          const AlertDialog(content: Alert);
+                          print('invalid password');
+                          setState(() {
+                            Alert(
+                                    context: context,
+                                    title: 'Passwords do not match!')
+                                .show();
+                          });
                         }
                       },
                     )),
@@ -140,8 +150,10 @@ class _createAccountState extends State<createAccount> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => login()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const login()));
                       },
                     )
                   ],
