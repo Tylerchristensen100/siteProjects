@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'main.dart';
 import 'newAccount.dart';
+import 'forgotPassword.dart';
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -18,6 +20,9 @@ class _loginState extends State<login> {
   String email = '';
   String password = '';
   bool showSpinner = false;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +57,7 @@ class _loginState extends State<login> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    // controller: nameController,
+                    controller: emailController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'email',
@@ -67,7 +72,7 @@ class _loginState extends State<login> {
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: TextField(
                     obscureText: true,
-                    // controller: passwordController,
+                    controller: passwordController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
@@ -80,7 +85,10 @@ class _loginState extends State<login> {
                 TextButton(
                   onPressed: () {
                     //forgot password screen
-                    //send to forgot password screen so they can reset it
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPassword()));
                   },
                   child: const Text(
                     'Forgot Password',
@@ -112,6 +120,40 @@ class _loginState extends State<login> {
                           }
                         } catch (e) {
                           print(e);
+                          setState(() {
+                            showSpinner = false;
+                            Alert(
+                              context: context,
+                              style: AlertStyle(
+                                // backgroundColor: Colors.blueGrey.shade900,
+                                titleStyle: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
+                                descStyle: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
+                              ),
+                              title: e.toString().split(']')[1],
+                              buttons: [
+                                DialogButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text(
+                                    "close",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 20),
+                                  ),
+                                ),
+                              ],
+                            ).show();
+                            passwordController.clear();
+                          });
+
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const createAccount()));
                         }
                       },
                     )),

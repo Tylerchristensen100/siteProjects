@@ -21,9 +21,9 @@ class _createAccountState extends State<createAccount> {
 
   bool showSpinner = false;
 
-  TextEditingController emailController;
-  TextEditingController passwordController;
-  TextEditingController password2Controller
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final password2Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +58,11 @@ class _createAccountState extends State<createAccount> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    // controller: nameController,
+                    controller: emailController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'email',
+                      hintText: 'john@example.com',
                     ),
                     keyboardType: TextInputType.emailAddress,
                     onChanged: (value) {
@@ -73,7 +74,7 @@ class _createAccountState extends State<createAccount> {
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: TextField(
                     obscureText: true,
-                    // controller: passwordController,
+                    controller: passwordController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
@@ -124,6 +125,34 @@ class _createAccountState extends State<createAccount> {
                             }
                           } catch (e) {
                             print(e);
+                            setState(() {
+                              showSpinner = false;
+                              Alert(
+                                context: context,
+                                style: AlertStyle(
+                                  // backgroundColor: Colors.blueGrey.shade900,
+                                  titleStyle: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  ),
+                                  descStyle: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                  ),
+                                ),
+                                title: e.toString().split(']')[1],
+                                buttons: [
+                                  DialogButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text(
+                                      "close",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20),
+                                    ),
+                                  ),
+                                ],
+                              ).show();
+                            });
                             MaterialPageRoute(
                                 builder: (context) => const login());
                           }
@@ -131,9 +160,32 @@ class _createAccountState extends State<createAccount> {
                           print('invalid password');
                           setState(() {
                             Alert(
-                                    context: context,
-                                    title: 'Passwords do not match!')
-                                .show();
+                              style: AlertStyle(
+                                // backgroundColor: Colors.blueGrey.shade900,
+                                titleStyle: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
+                                descStyle: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
+                              ),
+                              context: context,
+                              title: "Passwords do not match",
+                              buttons: [
+                                DialogButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text(
+                                    "close",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 20),
+                                  ),
+                                ),
+                              ],
+                            ).show();
+                            passwordController.clear();
+                            password2Controller.clear();
                           });
                         }
                       },

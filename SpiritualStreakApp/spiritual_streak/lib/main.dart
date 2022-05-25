@@ -12,8 +12,9 @@ import 'about.dart';
 import 'history.dart';
 import 'logIn.dart';
 import 'newAccount.dart';
-import 'theme.dart';
 import 'settings.dart';
+import 'forgotPassword.dart';
+import 'theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,14 +27,8 @@ void main() async {
 }
 
 final firestore = FirebaseFirestore.instance;
-final _auth = FirebaseAuth.instance
-  ..authStateChanges().listen((User? user) {
-    if (user == null) {
-      print('User is currently signed out!');
-    } else {
-      print('User is signed in!');
-    }
-  });
+final _auth = FirebaseAuth.instance;
+bool status = false;
 
 getUser() async {
   final user = await _auth.currentUser;
@@ -47,9 +42,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (_auth.currentUser != null) {
+      status = true;
+    }
     return MaterialApp(
       title: _title,
-      home: const MyStatefulWidget(),
+      home: (status ? const MyStatefulWidget() : const login()),
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
@@ -59,6 +57,7 @@ class MyApp extends StatelessWidget {
         '/history': (context) => const history(),
         '/login': (context) => const login(),
         '/createAccount': (context) => const createAccount(),
+        '/forgotPassword': (context) => ForgotPassword(),
       },
     );
   }
@@ -118,18 +117,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const history()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text(
-                'log in',
-              ),
-              onTap: () {
-                getHistoryList();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const login()),
                 );
               },
             ),
