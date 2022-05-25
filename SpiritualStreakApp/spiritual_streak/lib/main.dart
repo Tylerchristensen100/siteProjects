@@ -3,25 +3,45 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'firebase_options.dart';
 import 'dart:convert';
 
 import 'about.dart';
 import 'history.dart';
+import 'logIn.dart';
+import 'newAccount.dart';
 import 'theme.dart';
+import 'settings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: 'spiritual-streak',
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(MyApp());
+}
+
+final firestore = FirebaseFirestore.instance;
+final _auth = FirebaseAuth.instance
+  ..authStateChanges().listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
+
+getUser() async {
+  final user = await _auth.currentUser;
+  return user;
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   static const String _title = 'Spiritual Streak';
 
@@ -37,6 +57,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/about': (context) => const about(),
         '/history': (context) => const history(),
+        '/login': (context) => const login(),
+        '/createAccount': (context) => const createAccount(),
       },
     );
   }
@@ -96,6 +118,30 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const history()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'log in',
+              ),
+              onTap: () {
+                getHistoryList();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const login()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'Settings',
+              ),
+              onTap: () {
+                getHistoryList();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const settings()),
                 );
               },
             ),
@@ -194,9 +240,28 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 }
 
 getCount() async {
+  //Shared Preferences
   int counter = await _read('counter').then((value) {
     return value;
   });
+
+  //Firebase
+  final CollectionReference collection = firestore.collection('count');
+  var data = await getData(collection);
+  int cloudCount = data['counter'];
+
+  if (cloudCount == counter) {
+    return counter;
+  }
+  if (cloudCount > counter) {
+    counter = cloudCount;
+    return counter;
+  }
+  if (cloudCount < counter) {
+    cloudCount = counter;
+    return counter;
+  }
+
   return counter;
 }
 
@@ -212,6 +277,14 @@ setCount(int count) async {
   await _save('counter', count).then((value) {
     return count;
   });
+
+  //save to firebase
+  final User loggedInUser = await getUser();
+
+  firestore
+      .collection('count')
+      .doc(loggedInUser.email)
+      .set({'counter': count, 'sender': loggedInUser.email});
 
   //set the date and count
   DateTime now = DateTime.now();
@@ -299,6 +372,17 @@ getHistoryList() async {
   historyList = await getHistory();
 
   return historyList;
+}
+
+Future getData(CollectionReference collectionRef) async {
+  try {
+    //to get data from a single/particular document alone.
+    var data = await collectionRef.doc(_auth.currentUser?.email).get();
+    return data.data();
+  } catch (e) {
+    debugPrint("Error - $e");
+    return e;
+  }
 }
 
 Color TextColor(int count) {
