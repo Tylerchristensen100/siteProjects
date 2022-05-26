@@ -22,7 +22,6 @@ void main() async {
     name: 'spiritual-streak',
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   runApp(MyApp());
 }
 
@@ -268,10 +267,8 @@ setCount(int count) async {
   //save to firebase
   final User loggedInUser = await getUser();
 
-  firestore
-      .collection('count')
-      .doc(loggedInUser.email)
-      .set({'counter': count, 'sender': loggedInUser.email});
+  firestore.collection('count').doc(loggedInUser.email).set(
+      {'counter': count, 'sender': loggedInUser.email, 'history': historyList});
 
   //set the date and count
   DateTime now = DateTime.now();
