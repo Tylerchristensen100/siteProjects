@@ -264,12 +264,6 @@ setCount(int count) async {
     return count;
   });
 
-  //save to firebase
-  final User loggedInUser = await getUser();
-
-  firestore.collection('count').doc(loggedInUser.email).set(
-      {'counter': count, 'sender': loggedInUser.email, 'history': historyList});
-
   //set the date and count
   DateTime now = DateTime.now();
   DateTime dateObject = DateTime(now.year, now.month, now.day);
@@ -283,6 +277,14 @@ setCount(int count) async {
 
   //then append history to the new list
   historyList.add(history);
+
+  //save to firebase
+  final User loggedInUser = await getUser();
+
+  firestore
+      .collection('count')
+      .doc(loggedInUser.email)
+      .set({'counter': count, 'sender': loggedInUser.email});
 
   //instead of pushing the single history object push the entire list
   await _saveCountHistory('countHistory', json.encode(historyList))
