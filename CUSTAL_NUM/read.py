@@ -69,7 +69,7 @@ def prepCompare():
 
 
 def compare():
-    print(len(labels).__str__() + ' lables')
+    print('Working........')
     f = open('%s\stripped-%s.txt' % (filePath, dataFile), 'r')
     fC = open('%s\%s.txt' % (filePath, finalFile), 'w')
     lines = f.readlines()
