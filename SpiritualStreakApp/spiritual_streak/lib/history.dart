@@ -16,26 +16,39 @@ class history extends StatelessWidget {
           'Spiritual Streak',
         ),
       ),
-      body: Container(
-        child: SafeArea(
-          child: ListView.builder(
-            itemCount: history.length,
-            padding: const EdgeInsets.only(top: 20, bottom: 20),
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 50,
-                margin: const EdgeInsets.only(top: 5, bottom: 10),
-                child: Center(
-                  child: Text(
-                    'Date: ${dateFormat(history[index]['date'])}, \n   Streak: ${history[index]['count']} days',
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
+      body: SafeArea(
+        child: ListView.separated(
+          itemCount: history.length,
+          padding: const EdgeInsets.only(top: 20, bottom: 20),
+          itemBuilder: (BuildContext context, int index) {
+            // return Container(
+            //   height: 50,
+            //   margin: const EdgeInsets.only(top: 5, bottom: 10),
+            //   child: Center(
+            //     child: Text(
+            //       'Date: ${dateFormat(history[index]['date'])}, \n   Streak: ${history[index]['count']} days',
+            //       style: const TextStyle(
+            //         fontSize: 20,
+            //       ),
+            //     ),
+            //   ),
+            // );
+            return Container(
+              height: 50,
+              margin: const EdgeInsets.only(top: 5, bottom: 10),
+              child: ListTile(
+                title: Text(
+                  'Date: ${dateFormat(history[index]['date'])}, \n   Streak: ${history[index]['count']} days',
+                  style: const TextStyle(
+                    fontSize: 20,
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const Divider();
+          },
         ),
       ),
     );

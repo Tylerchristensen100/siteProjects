@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+// import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'main.dart';
 import 'logIn.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -24,7 +23,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -34,7 +33,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             ),
             TextField(
               controller: emailController,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 labelText: 'Email',
                 icon: Icon(

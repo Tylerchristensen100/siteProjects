@@ -30,7 +30,7 @@ final _auth = FirebaseAuth.instance;
 bool status = false;
 
 getUser() async {
-  final user = await _auth.currentUser;
+  final user = _auth.currentUser;
   return user;
 }
 
@@ -97,18 +97,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
             ListTile(
               title: const Text(
-                'About',
-              ),
-              onTap: () {
-                // Update the state of the app.
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const about()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text(
                 'History',
               ),
               onTap: () {
@@ -119,6 +107,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 );
               },
             ),
+            const Divider(),
             ListTile(
               title: const Text(
                 'Settings',
@@ -131,6 +120,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 );
               },
             ),
+            const Divider(),
             ListTile(
               title: const Text(
                 'Reset',
@@ -179,6 +169,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 });
               },
             ),
+            const Divider(),
           ],
         ),
       ),
@@ -230,6 +221,24 @@ getCount() async {
   int counter = await _read('counter').then((value) {
     return value;
   });
+
+  //check if the date is past the previous streak date
+  List l = await getHistory();
+  String date = l[l.length - 1]['date'];
+  DateTime now = DateTime.now();
+  DateTime d = DateTime.parse(date);
+  DateTime dt = DateTime(d.year, d.month, d.day + 1);
+  DateTime dtNow = DateTime(now.year, now.month, now.day);
+
+  if (dt.isBefore(dtNow)) {
+    setCount(0);
+    resetHistory();
+  }
+
+  //if count history and the stored count are the same then assume no error and use that value
+  if (counter == l[l.length - 1]['count']) {
+    return counter;
+  }
 
   //Firebase
   final CollectionReference collection = firestore.collection('count');
@@ -375,13 +384,13 @@ Color TextColor(int count) {
   if (count < 10) {
     return Colors.white;
   }
-  if (count > 10 && count < 50) {
+  if (count >= 10 && count < 50) {
     return Colors.yellowAccent;
   }
-  if (count > 50 && count < 100) {
+  if (count >= 50 && count < 100) {
     return gold;
   }
-  if (count > 100) {
+  if (count >= 100) {
     return Colors.orange;
   }
   return Colors.white;
