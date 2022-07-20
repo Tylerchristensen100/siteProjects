@@ -1,9 +1,18 @@
-<script setup lang="ts">
-import TheWelcome from '@/components/TheWelcome.vue'
+<!-- eslint-disable prettier/prettier -->
+<script>
+import Heading from "@/components/Heading.vue";
+export default {
+  name: "Home",
+  components: {
+    Heading,
+  },
+};
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="container">
+    <Heading />
+  </div>
 </template>
+
+<style></style>
