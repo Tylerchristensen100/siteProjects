@@ -4,11 +4,16 @@ import { createPinia } from 'pinia';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPhone,faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
 
-library.add(faPhone,faStar);
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+/* import specific icons */
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faStar);
 
 
 import App from './App.vue'
