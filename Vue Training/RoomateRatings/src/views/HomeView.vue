@@ -2,10 +2,12 @@
 <!-- eslint-disable prettier/prettier -->
 <script>
 import Heading from "@/components/Heading.vue";
+import db from "@/db.js";
 export default {
   name: "Home",
   components: {
     Heading,
+    props: ["user"],
   },
 };
 </script>
@@ -13,6 +15,7 @@ export default {
 <template>
   <div class="container">
     <Heading />
+    <h1>Welcome {{user}}</h1>
   </div>
 </template>
 

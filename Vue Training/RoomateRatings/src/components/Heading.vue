@@ -12,7 +12,7 @@ export default {
     <div class="row text-center">
       <div class="col-4"></div>
       <div class="col">
-        <font-awesome-icon icon="fa-solid fa-star" />
+        <font-awesome-icon icon="fa-solid fa-star" size="6x" color="yellow" />
       </div>
       <div class="col">
         <font-awesome-icon icon="fa-solid fa-star" size="6x" color="yellow" />

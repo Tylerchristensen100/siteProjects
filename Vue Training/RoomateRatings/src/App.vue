@@ -1,5 +1,21 @@
-<script setup lang="ts">
+<script lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import firebase from 'firebase'
+import db from "./db.js";
+export default {
+  name: "App",
+  data() {
+    return {
+     user: null,
+    };
+  },
+  mounted() {
+    db.collection('users').doc("4UJWsqTKEYZP6mfFc3T9").get()
+    .then(snapshot => {
+      this.user = snapshot.data().name;
+    });
+  }
+};
 </script>
 
 <template>
@@ -21,7 +37,7 @@ import { RouterLink, RouterView } from 'vue-router'
       </nav>
   </header>
 
-  <RouterView />
+  <RouterView :user="user" />
 </template>
 
 <style scoped>
