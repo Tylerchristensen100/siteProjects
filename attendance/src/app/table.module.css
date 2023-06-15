@@ -1,0 +1,22 @@
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    display: grid;
+}
+.date {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.headingName {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.row {
+    display:grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr;
+}
