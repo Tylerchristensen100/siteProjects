@@ -1,14 +1,18 @@
 import styles from 'src/app/table.module.css'
+import Checkbox from 'src/app/components/checkbox.js'
+import db from 'db.json'
 
-const people = [ {firstName: 'john', lastName: 'doe'}, {firstName: 'jane', lastName: 'doe'}]
-const isChecked = (month, day) => {
-  return false;
+async function getUsers() {
+  await fetch('/api/users', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+})
 }
-const setChecked = (checked) => {
+export default function Table() {
+   getUsers()
 
-}
-
-export default function Table({ items }) {
     const monthName = {
         1: 'Jan',
         2: 'Feb',
@@ -77,6 +81,13 @@ export default function Table({ items }) {
         return dates
     }
     const dates = getDates()
+
+  const isAttended = (firstName, lastName, month, day) => {
+    const person = db.find(p => p.firstName == firstName && p.lastName == lastName)
+    const date = month + '-' + day
+    
+    return person.dates[date]
+  }
     
   return (
     <>
@@ -91,14 +102,15 @@ export default function Table({ items }) {
           </tr>
         </thead>
         <tbody>
-          {people.map(({firstName, lastName}, index) => {
+          {db.map(({firstName, lastName}, index) => {
             return (
               <tr key={index} className={styles.row}>
                 <td className={styles.name}>{firstName} {lastName}</td>
                 {dates.map(({month, day}, index) => {
                   return (
                   <td key={index} className={styles.date}>
-                    <input type="checkbox" data-date={month + "-" + day} checked={isChecked(month, day)} onClick={setChecked(!isChecked(month, day))}/>
+                    <Checkbox key={index}  firstName={firstName} lastName={lastName} date={month + '-' + day} attended={isAttended(firstName, lastName, month, day)} />
+                    {/* <input type="checkbox" data-date={month + "-" + day} checked={isChecked(month, day)} onClick={setChecked(!isChecked(month, day))}/> */}
                   </td>
                   )
                 })
