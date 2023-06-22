@@ -1,11 +1,8 @@
 "use client"
 import { useState } from 'react';
-import db from 'db.json'
 
 
 const Push = (firstName, lastName, date, isChecked) => {
-    const i = db.findIndex(p => p.firstName == firstName && p.lastName == lastName)
-    db[i].dates[date] = isChecked
     console.log(firstName, lastName, date, isChecked)
     fetch('/api/setchecked', {
         method: 'POST',

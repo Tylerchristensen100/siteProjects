@@ -2,15 +2,7 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 import db from 'db.json' assert { type: "json" }
 
-function save(data) {
-  fs.writeFile('db.json', JSON.stringify(data), err => {
-    if(err) {
-      console.log(err)
-    } else {
-      console.log('Success')
-    }
-  })
-}
+
 export async function GET() {
   return NextResponse.json({ message: "Hello" })
 }
@@ -32,4 +24,16 @@ export async function POST(req) {
   }
   
   return NextResponse.json({ message: 'Success' })
+}
+
+
+
+function save(data) {
+  fs.writeFile('db.json', JSON.stringify(data), err => {
+    if(err) {
+      console.log(err)
+    } else {
+      console.log('Success')
+    }
+  })
 }

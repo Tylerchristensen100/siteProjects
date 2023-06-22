@@ -1,17 +1,10 @@
 import styles from 'src/app/table.module.css'
 import Checkbox from 'src/app/components/checkbox.js'
-import db from 'db.json'
+import { getUsers } from 'src/app/api/users/index.js'
 
-async function getUsers() {
-  await fetch('/api/users', {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-})
-}
+
 export default function Table() {
-   getUsers()
+   const users = getUsers()
 
     const monthName = {
         1: 'Jan',
@@ -83,7 +76,7 @@ export default function Table() {
     const dates = getDates()
 
   const isAttended = (firstName, lastName, month, day) => {
-    const person = db.find(p => p.firstName == firstName && p.lastName == lastName)
+    const person = users.find(p => p.firstName == firstName && p.lastName == lastName)
     const date = month + '-' + day
     
     return person.dates[date]
@@ -102,7 +95,7 @@ export default function Table() {
           </tr>
         </thead>
         <tbody>
-          {db.map(({firstName, lastName}, index) => {
+          {users.map(({firstName, lastName}, index) => {
             return (
               <tr key={index} className={styles.row}>
                 <td className={styles.name}>{firstName} {lastName}</td>
