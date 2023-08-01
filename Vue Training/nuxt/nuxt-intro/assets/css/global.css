@@ -1,0 +1,46 @@
+body, * {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #fff;
+    text-decoration: none;
+}
+a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+h1 {
+    font-size: 2em;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+}
+h2 {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+}
+h3 {
+    font-size: 1.17em;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+}
+h4 {
+    font-size: 1em;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+}
+h5 {
+    font-size: 0.83em;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+}
+h6 {
+    font-size: 0.67em;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+}
