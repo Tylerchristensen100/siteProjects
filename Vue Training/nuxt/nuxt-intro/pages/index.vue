@@ -1,4 +1,4 @@
 <template>
-    <h1>Home Page</h1>
+    <h1>Tyler Christensen</h1>
     <NuxtWelcome />
 </template>
