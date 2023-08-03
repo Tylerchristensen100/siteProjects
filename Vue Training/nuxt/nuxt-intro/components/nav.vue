@@ -4,11 +4,33 @@
             <ul>
                 <li><NuxtLink to="/">Home</NuxtLink></li>
                 <li><NuxtLink to="/about">about</NuxtLink></li>
-                <li><NuxtLink to=""></NuxtLink></li>
+                <li v-if="isLoggedIn"><NuxtLink to='/logout'>Logout</NuxtLink></li>
+                <li v-else="isLoggedIn"><NuxtLink to='/login'>Login</NuxtLink></li>
             </ul>
         </nav>
     </header>
 </template>
+
+<script setup>
+const supabase = useSupabaseClient()
+let isLoggedIn = false
+const { data, error } = await supabase.auth.getSession()
+if(data.session != null) {
+    isLoggedIn = true
+    console.log('Logged In')
+
+    if(data.session.expires_in < 1500) {
+    supabase.auth.refreshSession()
+    console.log('Session Refreshed')
+}
+}
+else {
+    isLoggedIn = false
+    console.log('Not Logged In')
+}
+
+
+</script>
 <style>
     header {
         padding: 20px;
