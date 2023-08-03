@@ -19,7 +19,7 @@ export default {
         async getPost() {
             const id = this.$route.params.id
             try {
-                const post = await fetch(`http://localhost:3000/api/blog/${id}`)
+                const post = await fetch(`/api/blog/${id}`)
                 .then(res => res.text())
                 .then(data => data)
                 this.post = JSON.parse(post)

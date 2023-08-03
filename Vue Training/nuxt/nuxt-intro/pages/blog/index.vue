@@ -22,7 +22,7 @@ export default {
     methods: {
         async getPosts() {
             try {
-                const posts = await fetch(`http://localhost:3000/api/blog/`)
+                const posts = await fetch(`/api/blog/`)
                 .then(res => res.text())
                 .then(data => data)
                 this.posts = JSON.parse(posts)
